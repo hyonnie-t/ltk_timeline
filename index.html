@@ -8,39 +8,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
 :root {
-  --bg: #0d0f14;
-  --surface: #161921;
-  --surface2: #1e2230;
-  --border: rgba(255,255,255,0.07);
-  --text: #e8e4dc;
-  --text-dim: #8a8578;
-  --text-muted: #4a4640;
+  --bg: #f5f2ed;
+  --surface: #ffffff;
+  --surface2: #f0ece6;
+  --border: #ddd8d0;
+  --border-strong: #c8c0b5;
+  --text: #1a1714;
+  --text-dim: #5a5550;
+  --text-muted: #9a9490;
 
-  --goryeo: #4a90d9;
-  --goryeo-bg: rgba(74,144,217,0.12);
-  --goryeo-border: rgba(74,144,217,0.4);
+  --goryeo: #1a5fa8;
+  --goryeo-bg: #e8f0fa;
+  --goryeo-border: #a8c4e8;
 
-  --hubaekje: #e05c3a;
-  --hubaekje-bg: rgba(224,92,58,0.12);
-  --hubaekje-border: rgba(224,92,58,0.4);
+  --hubaekje: #c03820;
+  --hubaekje-bg: #faeae6;
+  --hubaekje-border: #e8a898;
 
-  --silla: #9b7fd4;
-  --silla-bg: rgba(155,127,212,0.12);
-  --silla-border: rgba(155,127,212,0.4);
+  --silla: #6b4db8;
+  --silla-bg: #f0ebfa;
+  --silla-border: #c4b0e8;
 
-  --other: #5aaa7a;
-  --other-bg: rgba(90,170,122,0.12);
-  --other-border: rgba(90,170,122,0.4);
+  --other: #2a7a50;
+  --other-bg: #e6f5ec;
+  --other-border: #98d0b0;
 
-  --gold: #c9a84c;
-  --gold-dim: rgba(201,168,76,0.3);
+  --gold: #8a6820;
+  --gold-bg: #faf5e6;
+  --gold-border: #d4b860;
 
-  --correct: #4caf7d;
-  --wrong: #e05c3a;
-  --timer-warn: #e0943a;
+  --correct: #1e8a50;
+  --correct-bg: #e6f5ec;
+  --wrong: #c03820;
+  --wrong-bg: #faeae6;
+  --timer-warn: #d06010;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
   background: var(--bg);
@@ -48,58 +52,50 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-/* 화면 전환 */
 .screen { display: none; }
 .screen.active { display: flex; flex-direction: column; min-height: 100vh; }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.fade-up { animation: fadeUp 0.5s ease forwards; }
+.fade-up { animation: fadeUp 0.45s ease forwards; }
 
-/* ─────────────── 타이틀 화면 ─────────────── */
+/* ─── 타이틀 ─── */
 #screen-title {
   justify-content: center;
   align-items: center;
   padding: 40px 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-#screen-title::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 40% at 20% 30%, rgba(74,144,217,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 50% at 80% 70%, rgba(224,92,58,0.06) 0%, transparent 70%);
-  pointer-events: none;
+  background: var(--bg);
 }
 
 .title-wrap {
-  max-width: 560px;
+  max-width: 580px;
   width: 100%;
   text-align: center;
-  position: relative;
-  z-index: 1;
 }
 
 .title-era {
+  display: inline-block;
   font-size: 12px;
-  letter-spacing: 5px;
+  letter-spacing: 4px;
   color: var(--gold);
-  margin-bottom: 24px;
-  text-transform: uppercase;
+  background: var(--gold-bg);
+  border: 1px solid var(--gold-border);
+  padding: 5px 16px;
+  border-radius: 20px;
+  margin-bottom: 22px;
 }
 
 .title-main {
   font-family: 'Noto Serif KR', serif;
-  font-size: 36px;
+  font-size: 34px;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.35;
   color: var(--text);
   margin-bottom: 10px;
 }
@@ -107,45 +103,31 @@ body {
 .title-sub {
   font-size: 15px;
   color: var(--text-dim);
-  margin-bottom: 36px;
-  letter-spacing: 1px;
+  margin-bottom: 32px;
 }
-
-.title-divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 36px;
-  justify-content: center;
-}
-.title-divider::before, .title-divider::after {
-  content: '';
-  flex: 1;
-  max-width: 80px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-dim));
-}
-.title-divider::after { background: linear-gradient(90deg, var(--gold-dim), transparent); }
-.title-divider span { font-size: 18px; color: var(--gold); }
 
 .legend {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 36px;
+  margin-bottom: 28px;
 }
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   font-size: 13px;
   color: var(--text-dim);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 20px;
 }
 .legend-dot {
-  width: 10px;
-  height: 10px;
+  width: 9px; height: 9px;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 .legend-dot.goryeo { background: var(--goryeo); }
 .legend-dot.hubaekje { background: var(--hubaekje); }
@@ -155,23 +137,20 @@ body {
 .rule-box {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 22px 26px;
+  border-radius: 14px;
+  padding: 20px 24px;
   text-align: left;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 .rule-title {
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 3px;
   color: var(--text-muted);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  font-weight: 700;
 }
-.rule-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-}
+.rule-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .rule-list li {
   font-size: 14px;
   color: var(--text-dim);
@@ -181,65 +160,52 @@ body {
   line-height: 1.6;
 }
 .rule-list li::before {
-  content: '—';
+  content: '·';
   color: var(--gold);
+  font-size: 18px;
   flex-shrink: 0;
-  margin-top: 1px;
+  line-height: 1.4;
 }
 
 .btn-start {
   width: 100%;
-  padding: 18px;
-  background: linear-gradient(135deg, #2a3a5a, #1e2a40);
-  border: 1px solid rgba(74,144,217,0.3);
-  border-radius: 10px;
-  color: var(--text);
+  padding: 17px;
+  background: var(--text);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
   font-family: 'Noto Serif KR', serif;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   letter-spacing: 2px;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.25s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
 }
-.btn-start::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(74,144,217,0.1), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(74,144,217,0.2); }
-.btn-start:hover::after { opacity: 1; }
+.btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.22); }
+.btn-start:active { transform: translateY(0); }
 
-/* ─────────────── 게임 화면 ─────────────── */
-#screen-game {
-  padding: 0;
-}
-
+/* ─── 게임 헤더 ─── */
 .game-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(13,15,20,0.95);
-  backdrop-filter: blur(12px);
+  background: rgba(245,242,237,0.96);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
-  padding: 12px 20px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .timer-ring {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: 46px; height: 46px;
   flex-shrink: 0;
 }
 .timer-ring svg { transform: rotate(-90deg); }
-.timer-ring .track { fill: none; stroke: var(--surface2); stroke-width: 3; }
+.timer-ring .track { fill: none; stroke: var(--border); stroke-width: 3; }
 .timer-ring .fill {
   fill: none;
   stroke: var(--goryeo);
@@ -251,26 +217,31 @@ body {
 }
 .timer-ring .fill.warn { stroke: var(--timer-warn); }
 .timer-ring .fill.danger { stroke: var(--wrong); }
+.timer-ring .fill.expired { stroke: var(--border-strong); }
 .timer-num {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text);
 }
+.timer-num.expired { color: var(--text-muted); }
 
-.header-info { flex: 1; }
+.header-info { flex: 1; min-width: 0; }
 .header-title {
-  font-size: 13px;
-  color: var(--text-dim);
-  margin-bottom: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .progress-bar {
-  height: 3px;
-  background: var(--surface2);
+  height: 4px;
+  background: var(--border);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -278,13 +249,10 @@ body {
   height: 100%;
   background: linear-gradient(90deg, var(--goryeo), var(--silla));
   border-radius: 2px;
-  transition: width 0.4s ease;
+  transition: width 0.35s ease;
 }
 
-.score-display {
-  text-align: right;
-  flex-shrink: 0;
-}
+.score-display { text-align: right; flex-shrink: 0; }
 .score-num {
   font-size: 22px;
   font-weight: 700;
@@ -292,74 +260,67 @@ body {
   color: var(--gold);
   line-height: 1;
 }
-.score-label {
-  font-size: 11px;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-}
+.score-label { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
 
+/* ─── 게임 바디 ─── */
 .game-body {
+  flex: 1;
+  padding: 20px 16px;
+  max-width: 780px;
+  margin: 0 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0;
-  flex: 1;
-  padding: 24px 20px;
-  max-width: 720px;
-  margin: 0 auto;
-  width: 100%;
 }
 
-/* 타임라인 영역 */
-.timeline-area {
-  margin-bottom: 28px;
-}
-
-.timeline-label {
+/* 타임라인 */
+.section-label {
   font-size: 11px;
   letter-spacing: 3px;
   color: var(--text-muted);
-  margin-bottom: 16px;
+  font-weight: 700;
+  margin-bottom: 14px;
   text-transform: uppercase;
 }
 
 .timeline-slots {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   position: relative;
+  margin-bottom: 28px;
 }
-
 .timeline-slots::before {
   content: '';
   position: absolute;
-  left: 80px;
-  top: 20px;
-  bottom: 20px;
-  width: 1px;
-  background: linear-gradient(180deg, transparent, var(--border) 10%, var(--border) 90%, transparent);
+  left: 74px;
+  top: 22px;
+  bottom: 22px;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--border) 8%, var(--border) 92%, transparent);
 }
 
 .slot {
   display: flex;
   align-items: center;
   gap: 0;
-  position: relative;
 }
 
 .slot-year {
-  width: 72px;
+  width: 68px;
   flex-shrink: 0;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text-muted);
   text-align: right;
-  padding-right: 16px;
-  letter-spacing: 0.5px;
+  padding-right: 14px;
   font-family: 'Noto Serif KR', serif;
+  line-height: 1.2;
 }
 
 .slot-dot {
-  width: 16px;
+  width: 14px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -367,481 +328,41 @@ body {
   z-index: 1;
 }
 .slot-dot-inner {
-  width: 7px;
-  height: 7px;
+  width: 8px; height: 8px;
   border-radius: 50%;
-  background: var(--surface2);
-  border: 1px solid var(--border);
+  background: var(--surface);
+  border: 2px solid var(--border-strong);
   transition: all 0.3s;
 }
 
 .slot-drop {
   flex: 1;
-  min-height: 52px;
-  border: 1.5px dashed rgba(255,255,255,0.1);
-  border-radius: 8px;
+  min-height: 54px;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
   margin-left: 10px;
-  padding: 6px;
-  transition: all 0.25s;
+  padding: 5px;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
+  background: var(--surface);
 }
-
 .slot-drop.drag-over {
   border-color: var(--gold);
-  background: rgba(201,168,76,0.06);
-  box-shadow: 0 0 0 1px var(--gold-dim);
+  background: var(--gold-bg);
+  transform: scale(1.01);
 }
+.slot-drop.touch-over {
+  border-color: var(--gold);
+  background: var(--gold-bg);
+}
+.slot-drop.filled { border-style: solid; border-color: var(--border); }
 
-.slot-drop.filled {
-  border-style: solid;
-  padding: 4px;
-}
-
-/* 카드 공통 */
-.event-card {
-  border-radius: 7px;
-  padding: 10px 14px;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.5;
-  cursor: grab;
-  user-select: none;
-  transition: all 0.2s;
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-}
-.event-card:active { cursor: grabbing; }
-.event-card.dragging { opacity: 0.4; transform: scale(0.97); }
-
-.event-card .card-faction {
-  font-size: 10px;
-  letter-spacing: 1px;
-  font-weight: 700;
-  white-space: nowrap;
-  flex-shrink: 0;
-  padding: 2px 7px;
-  border-radius: 3px;
-}
-
-.event-card.goryeo {
-  background: var(--goryeo-bg);
-  border: 1px solid var(--goryeo-border);
-  color: var(--text);
-}
-.event-card.goryeo .card-faction {
-  background: rgba(74,144,217,0.2);
-  color: var(--goryeo);
-}
-
-.event-card.hubaekje {
-  background: var(--hubaekje-bg);
-  border: 1px solid var(--hubaekje-border);
-  color: var(--text);
-}
-.event-card.hubaekje .card-faction {
-  background: rgba(224,92,58,0.2);
-  color: var(--hubaekje);
-}
-
-.event-card.silla {
-  background: var(--silla-bg);
-  border: 1px solid var(--silla-border);
-  color: var(--text);
-}
-.event-card.silla .card-faction {
-  background: rgba(155,127,212,0.2);
-  color: var(--silla);
-}
-
-.event-card.other {
-  background: var(--other-bg);
-  border: 1px solid var(--other-border);
-  color: var(--text);
-}
-.event-card.other .card-faction {
-  background: rgba(90,170,122,0.2);
-  color: var(--other);
-}
-
-.event-card:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-
-/* 카드 더미 */
-.cards-area {
-  margin-bottom: 24px;
-}
-.cards-label {
-  font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-  text-transform: uppercase;
-}
-.cards-pool {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  min-height: 60px;
-  padding: 14px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-}
-.cards-pool .event-card {
-  width: auto;
-  flex: 0 0 auto;
-}
-
-/* 확인 버튼 */
-.btn-check {
-  width: 100%;
-  padding: 16px;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--text-dim);
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: all 0.3s;
-}
-.btn-check.ready {
-  background: linear-gradient(135deg, #1e3a2a, #162a1e);
-  border-color: rgba(76,175,125,0.4);
-  color: var(--correct);
-}
-.btn-check.ready:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(76,175,125,0.15); }
-.btn-check:disabled { opacity: 0.4; cursor: not-allowed; }
-
-/* ─────────────── 피드백 화면 ─────────────── */
-#screen-feedback {
-  padding: 0;
-}
-
-.feedback-header {
-  padding: 24px 20px 0;
-  max-width: 720px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.feedback-score-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  padding: 18px 22px;
-  background: var(--surface);
-  border-radius: 12px;
-  border: 1px solid var(--border);
-}
-
-.fb-score-left .fb-score-num {
-  font-size: 42px;
-  font-weight: 700;
-  font-family: 'Noto Serif KR', serif;
-  color: var(--gold);
-  line-height: 1;
-}
-.fb-score-left .fb-score-label {
-  font-size: 13px;
-  color: var(--text-dim);
-  margin-top: 4px;
-}
-
-.fb-score-right {
-  text-align: right;
-}
-.fb-accuracy {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1;
-}
-.fb-accuracy-label {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 4px;
-}
-
-.fb-time-bonus {
-  font-size: 13px;
-  color: var(--gold);
-  margin-top: 8px;
-  text-align: right;
-}
-
-.feedback-title {
-  font-size: 13px;
-  letter-spacing: 3px;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-
-/* 피드백 카드 목록 */
-.feedback-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 0 20px 100px;
-  max-width: 720px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.fb-item {
-  border-radius: 10px;
-  padding: 14px 16px;
-  border: 1px solid transparent;
-}
-
-.fb-item.correct {
-  background: rgba(76,175,125,0.08);
-  border-color: rgba(76,175,125,0.2);
-}
-.fb-item.wrong {
-  background: rgba(224,92,58,0.08);
-  border-color: rgba(224,92,58,0.2);
-}
-
-.fb-item-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 6px;
-}
-
-.fb-result-icon {
-  font-size: 16px;
-  flex-shrink: 0;
-}
-
-.fb-year {
-  font-size: 12px;
-  font-weight: 700;
-  font-family: 'Noto Serif KR', serif;
-  color: var(--text-dim);
-  flex-shrink: 0;
-}
-
-.fb-event-name {
-  font-size: 14px;
-  font-weight: 500;
-  flex: 1;
-  color: var(--text);
-}
-
-.fb-wrong-detail {
-  font-size: 13px;
-  color: var(--text-dim);
-  line-height: 1.5;
-  padding-left: 26px;
-}
-
-.fb-wrong-placed {
-  color: var(--wrong);
-  margin-bottom: 4px;
-}
-
-.fb-explain {
-  color: var(--text-dim);
-  border-left: 2px solid var(--gold-dim);
-  padding-left: 10px;
-  margin-top: 6px;
-  line-height: 1.6;
-}
-
-/* 하단 고정 버튼 */
-.feedback-bottom {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 16px 20px;
-  background: rgba(13,15,20,0.96);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 10px;
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.btn-retry {
-  flex: 1;
-  padding: 14px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--text-dim);
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.btn-retry:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
-
-.btn-result {
-  flex: 2;
-  padding: 14px;
-  background: linear-gradient(135deg, #2a3a5a, #1e2a40);
-  border: 1px solid rgba(74,144,217,0.3);
-  border-radius: 10px;
-  color: var(--text);
-  font-family: 'Noto Serif KR', serif;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: all 0.3s;
-}
-.btn-result:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(74,144,217,0.2); }
-
-/* ─────────────── 결과 화면 ─────────────── */
-#screen-result {
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-}
-
-.result-wrap {
-  max-width: 560px;
-  width: 100%;
-}
-
-.result-grade {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.grade-circle {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  border: 3px solid var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  font-family: 'Noto Serif KR', serif;
-  font-size: 46px;
-  font-weight: 700;
-  color: var(--gold);
-  background: rgba(201,168,76,0.08);
-  position: relative;
-}
-
-.result-title {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 6px;
-}
-.result-sub {
-  font-size: 14px;
-  color: var(--text-dim);
-}
-
-.result-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 28px;
-}
-
-.stat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px 12px;
-  text-align: center;
-}
-
-.stat-num {
-  font-family: 'Noto Serif KR', serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: 5px;
-}
-.stat-label {
-  font-size: 12px;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-}
-
-.result-insight {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--gold);
-  border-radius: 10px;
-  padding: 18px 20px;
-  margin-bottom: 24px;
-}
-.result-insight-title {
-  font-size: 11px;
-  letter-spacing: 3px;
-  color: var(--gold);
-  margin-bottom: 10px;
-}
-.result-insight-text {
-  font-size: 14px;
-  color: var(--text-dim);
-  line-height: 1.8;
-}
-
-.result-btns {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-home {
-  flex: 1;
-  padding: 14px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--text-dim);
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.btn-home:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
-
-.btn-again {
-  flex: 2;
-  padding: 14px;
-  background: linear-gradient(135deg, #2a3a5a, #1e2a40);
-  border: 1px solid rgba(74,144,217,0.3);
-  border-radius: 10px;
-  color: var(--text);
-  font-family: 'Noto Serif KR', serif;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: all 0.3s;
-}
-.btn-again:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(74,144,217,0.2); }
-
-/* 애니메이션 */
+/* 슬롯 정답/오답 */
 @keyframes pulse-correct {
-  0% { box-shadow: 0 0 0 0 rgba(76,175,125,0.4); }
-  70% { box-shadow: 0 0 0 8px rgba(76,175,125,0); }
-  100% { box-shadow: 0 0 0 0 rgba(76,175,125,0); }
-}
-@keyframes pulse-wrong {
-  0% { box-shadow: 0 0 0 0 rgba(224,92,58,0.4); }
-  70% { box-shadow: 0 0 0 8px rgba(224,92,58,0); }
-  100% { box-shadow: 0 0 0 0 rgba(224,92,58,0); }
+  0% { box-shadow: 0 0 0 0 rgba(30,138,80,0.35); }
+  70% { box-shadow: 0 0 0 10px rgba(30,138,80,0); }
+  100% { box-shadow: 0 0 0 0 rgba(30,138,80,0); }
 }
 @keyframes shake {
   0%,100% { transform: translateX(0); }
@@ -851,62 +372,365 @@ body {
   80% { transform: translateX(3px); }
 }
 
-.slot-correct .slot-drop { border-color: var(--correct) !important; background: rgba(76,175,125,0.08) !important; animation: pulse-correct 0.6s ease; }
-.slot-wrong .slot-drop { border-color: var(--wrong) !important; background: rgba(224,92,58,0.08) !important; animation: shake 0.5s ease, pulse-wrong 0.6s ease; }
+.slot-correct .slot-drop { border-color: var(--correct) !important; background: var(--correct-bg) !important; animation: pulse-correct 0.6s ease; border-style: solid !important; }
+.slot-wrong .slot-drop { border-color: var(--wrong) !important; background: var(--wrong-bg) !important; animation: shake 0.45s ease; border-style: solid !important; }
 
+/* 카드 */
+.event-card {
+  border-radius: 8px;
+  padding: 9px 13px;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  cursor: grab;
+  touch-action: none;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.event-card:active { cursor: grabbing; }
+.event-card.dragging { opacity: 0.35; }
+.event-card.touch-dragging {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.22);
+  transform: scale(1.04) rotate(1deg);
+  width: auto !important;
+  min-width: 200px;
+  max-width: 320px;
+}
+
+.card-faction {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.event-card.goryeo { background: var(--goryeo-bg); border: 1.5px solid var(--goryeo-border); color: var(--text); }
+.event-card.goryeo .card-faction { background: rgba(26,95,168,0.15); color: var(--goryeo); }
+.event-card.hubaekje { background: var(--hubaekje-bg); border: 1.5px solid var(--hubaekje-border); color: var(--text); }
+.event-card.hubaekje .card-faction { background: rgba(192,56,32,0.15); color: var(--hubaekje); }
+.event-card.silla { background: var(--silla-bg); border: 1.5px solid var(--silla-border); color: var(--text); }
+.event-card.silla .card-faction { background: rgba(107,77,184,0.15); color: var(--silla); }
+.event-card.other { background: var(--other-bg); border: 1.5px solid var(--other-border); color: var(--text); }
+.event-card.other .card-faction { background: rgba(42,122,80,0.15); color: var(--other); }
+
+.event-card:hover:not(.touch-dragging) { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.13); }
+
+/* 카드 풀 */
+.cards-pool {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 64px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.cards-pool .event-card { width: auto; flex: 0 0 auto; }
+
+/* 시간 만료 배너 */
+.time-expired-banner {
+  display: none;
+  background: #fff8e6;
+  border: 1px solid var(--gold-border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.time-expired-banner.show { display: block; }
+
+/* 확인 버튼 */
+.btn-check {
+  width: 100%;
+  padding: 16px;
+  background: var(--border);
+  border: none;
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: not-allowed;
+  letter-spacing: 0.5px;
+  transition: all 0.25s;
+  margin-bottom: 40px;
+}
+.btn-check.ready {
+  background: var(--text);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+}
+.btn-check.ready:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.btn-check.ready:active { transform: translateY(0); }
+
+/* ─── 피드백 ─── */
+.feedback-header {
+  padding: 20px 16px 0;
+  max-width: 780px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.fb-score-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.fb-score-num { font-size: 44px; font-weight: 700; font-family: 'Noto Serif KR', serif; color: var(--gold); line-height: 1; }
+.fb-score-unit { font-size: 14px; color: var(--text-dim); margin-top: 4px; }
+.fb-accuracy { font-size: 30px; font-weight: 700; color: var(--text); line-height: 1; text-align: right; }
+.fb-accuracy-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; text-align: right; }
+.fb-time-bonus { font-size: 13px; color: var(--gold); margin-top: 6px; text-align: right; font-weight: 600; }
+
+.fb-section-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px 120px;
+  max-width: 780px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.fb-item {
+  border-radius: 12px;
+  padding: 13px 16px;
+  border: 1px solid transparent;
+}
+.fb-item.correct { background: var(--correct-bg); border-color: rgba(30,138,80,0.2); }
+.fb-item.wrong { background: var(--wrong-bg); border-color: rgba(192,56,32,0.2); }
+
+.fb-item-header { display: flex; align-items: center; gap: 9px; margin-bottom: 4px; }
+.fb-result-icon { font-size: 15px; flex-shrink: 0; }
+.fb-year { font-size: 12px; font-weight: 700; font-family: 'Noto Serif KR', serif; color: var(--text-dim); flex-shrink: 0; }
+.fb-event-name { font-size: 14px; font-weight: 600; flex: 1; color: var(--text); }
+
+.fb-wrong-detail { padding-left: 24px; }
+.fb-wrong-placed { font-size: 12px; color: var(--wrong); margin-bottom: 6px; font-weight: 600; }
+.fb-explain {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  border-left: 3px solid var(--gold-border);
+  padding-left: 10px;
+}
+
+.feedback-bottom {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 14px 16px;
+  background: rgba(245,242,237,0.97);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+}
+
+.btn-retry {
+  flex: 1;
+  padding: 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-dim);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-retry:hover { border-color: var(--text); color: var(--text); }
+
+.btn-result {
+  flex: 2;
+  padding: 14px;
+  background: var(--text);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.25s;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+}
+.btn-result:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.2); }
+
+/* ─── 결과 ─── */
+#screen-result {
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: var(--bg);
+}
+
+.result-wrap { max-width: 560px; width: 100%; }
+
+.grade-circle {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--gold-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--gold);
+  background: var(--gold-bg);
+}
+
+.result-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.result-sub { font-size: 14px; color: var(--text-dim); text-align: center; margin-bottom: 28px; }
+
+.result-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 10px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.stat-num { font-family: 'Noto Serif KR', serif; font-size: 26px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 5px; }
+.stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; }
+
+.result-insight {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold-border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.result-insight-title { font-size: 11px; letter-spacing: 3px; color: var(--gold); margin-bottom: 10px; font-weight: 700; }
+.result-insight-text { font-size: 14px; color: var(--text-dim); line-height: 1.85; }
+
+.result-btns { display: flex; gap: 10px; }
+.btn-home {
+  flex: 1; padding: 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-dim);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-home:hover { border-color: var(--text); color: var(--text); }
+.btn-again {
+  flex: 2; padding: 14px;
+  background: var(--text);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 15px; font-weight: 600;
+  cursor: pointer; letter-spacing: 1px;
+  transition: all 0.25s;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+}
+.btn-again:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.2); }
+
+/* 태블릿 최적화 */
+@media (min-width: 600px) {
+  .title-main { font-size: 40px; }
+  .game-body { padding: 24px 24px; }
+  .slot-year { width: 80px; font-size: 13px; }
+  .timeline-slots::before { left: 84px; }
+  .event-card { font-size: 14.5px; padding: 10px 16px; }
+  .cards-pool { gap: 10px; padding: 16px; }
+}
 </style>
 </head>
 <body>
 
-<!-- ════════════ 타이틀 ════════════ -->
+<!-- 타이틀 -->
 <div id="screen-title" class="screen active">
   <div class="title-wrap fade-up">
     <div class="title-era">918 — 936</div>
     <div class="title-main">후삼국의 혼란,<br>고려의 통일</div>
     <div class="title-sub">사건 카드를 시간 순서대로 배치하세요</div>
-
-    <div class="title-divider"><span>◆</span></div>
-
     <div class="legend">
       <div class="legend-item"><div class="legend-dot goryeo"></div>고려</div>
       <div class="legend-item"><div class="legend-dot hubaekje"></div>후백제</div>
       <div class="legend-item"><div class="legend-dot silla"></div>신라</div>
       <div class="legend-item"><div class="legend-dot other"></div>기타</div>
     </div>
-
     <div class="rule-box">
       <div class="rule-title">RULE</div>
       <ul class="rule-list">
-        <li>카드를 드래그해서 왼쪽 타임라인의 알맞은 칸에 놓으세요</li>
-        <li>제한 시간은 <strong style="color:var(--text)">90초</strong>. 남은 시간이 점수에 반영됩니다</li>
-        <li>정답 1개당 <strong style="color:var(--text)">10점</strong>, 시간 보너스 최대 <strong style="color:var(--text)">20점</strong></li>
+        <li>카드를 드래그(또는 터치)해서 왼쪽 타임라인 칸에 놓으세요</li>
+        <li>제한 시간은 <strong>180초</strong> — 시간이 지나도 계속 풀 수 있어요</li>
+        <li>정답 1개당 <strong>10점</strong>, 시간 내 완료 시 보너스 최대 <strong>20점</strong></li>
         <li>틀린 항목은 결과에서 해설과 함께 확인할 수 있습니다</li>
       </ul>
     </div>
-
     <button class="btn-start" onclick="startGame()">시작하기 →</button>
   </div>
 </div>
 
-<!-- ════════════ 게임 ════════════ -->
+<!-- 게임 -->
 <div id="screen-game" class="screen">
-
   <div class="game-header">
     <div class="timer-ring">
-      <svg width="48" height="48" viewBox="0 0 48 48">
-        <circle class="track" cx="24" cy="24" r="20"/>
-        <circle class="fill" id="timer-fill" cx="24" cy="24" r="20"/>
+      <svg width="46" height="46" viewBox="0 0 46 46">
+        <circle class="track" cx="23" cy="23" r="20"/>
+        <circle class="fill" id="timer-fill" cx="23" cy="23" r="20"/>
       </svg>
-      <div class="timer-num" id="timer-num">90</div>
+      <div class="timer-num" id="timer-num">180</div>
     </div>
-
     <div class="header-info">
-      <div class="header-title">타임라인 배치 — 후삼국~고려 통일</div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-      </div>
+      <div class="header-title">후삼국 ~ 고려 통일 타임라인</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
     </div>
-
     <div class="score-display">
       <div class="score-num" id="score-num">0</div>
       <div class="score-label">점</div>
@@ -914,22 +738,15 @@ body {
   </div>
 
   <div class="game-body">
+    <div class="section-label">TIMELINE — 슬롯에 카드를 놓으세요</div>
+    <div class="timeline-slots" id="timeline-slots"></div>
 
-    <!-- 타임라인 슬롯 -->
-    <div class="timeline-area">
-      <div class="timeline-label">TIME LINE — 슬롯에 카드를 놓으세요</div>
-      <div class="timeline-slots" id="timeline-slots">
-        <!-- JS로 생성 -->
-      </div>
+    <div class="time-expired-banner" id="time-expired-banner">
+      ⏱ 시간이 지났어요 — 점수 보너스는 없지만 계속 풀 수 있어요!
     </div>
 
-    <!-- 카드 풀 -->
-    <div class="cards-area">
-      <div class="cards-label">EVENT CARDS — 드래그해서 배치하세요</div>
-      <div class="cards-pool" id="cards-pool">
-        <!-- JS로 생성 -->
-      </div>
-    </div>
+    <div class="section-label">EVENT CARDS — 드래그하거나 터치해서 배치하세요</div>
+    <div class="cards-pool" id="cards-pool"></div>
 
     <button class="btn-check" id="btn-check" onclick="checkAnswers()" disabled>
       모든 카드를 배치하면 확인할 수 있어요
@@ -937,57 +754,39 @@ body {
   </div>
 </div>
 
-<!-- ════════════ 피드백 ════════════ -->
+<!-- 피드백 -->
 <div id="screen-feedback" class="screen">
   <div class="feedback-header">
-    <div class="feedback-score-bar" id="fb-score-bar">
-      <!-- JS -->
-    </div>
-    <div class="feedback-title">결과 상세 — 틀린 항목에는 해설이 있습니다</div>
+    <div class="fb-score-bar" id="fb-score-bar"></div>
+    <div class="fb-section-label">결과 상세 — 틀린 항목에 해설이 있습니다</div>
   </div>
-  <div class="feedback-list" id="feedback-list">
-    <!-- JS -->
-  </div>
+  <div class="feedback-list" id="feedback-list"></div>
   <div class="feedback-bottom">
     <button class="btn-retry" onclick="retryGame()">다시 도전</button>
     <button class="btn-result" onclick="showResult()">전체 흐름 정리 →</button>
   </div>
 </div>
 
-<!-- ════════════ 결과 ════════════ -->
+<!-- 결과 -->
 <div id="screen-result" class="screen">
   <div class="result-wrap fade-up">
-    <div class="result-grade">
-      <div class="grade-circle" id="grade-circle">A</div>
-      <div class="result-title" id="result-title">역사의 흐름을 꿰뚫었어요</div>
-      <div class="result-sub" id="result-sub">후삼국의 혼란과 고려 통일 과정을 정확히 이해했습니다</div>
-    </div>
-
+    <div class="grade-circle" id="grade-circle">A</div>
+    <div class="result-title" id="result-title"></div>
+    <div class="result-sub" id="result-sub"></div>
     <div class="result-stats">
-      <div class="stat-card">
-        <div class="stat-num" id="stat-score">0</div>
-        <div class="stat-label">최종 점수</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num" id="stat-correct">0</div>
-        <div class="stat-label">정답 / 전체</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num" id="stat-time">0</div>
-        <div class="stat-label">남은 시간</div>
-      </div>
+      <div class="stat-card"><div class="stat-num" id="stat-score">0</div><div class="stat-label">최종 점수</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-correct">0</div><div class="stat-label">정답 / 전체</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-time">0</div><div class="stat-label">남은 시간</div></div>
     </div>
-
     <div class="result-insight">
       <div class="result-insight-title">◆ 이 시기의 핵심 흐름</div>
       <div class="result-insight-text">
-        신라 말의 혼란 속에 견훤(후백제)과 궁예(후고구려)가 나라를 세우며 후삼국이 시작됩니다.
-        왕건은 궁예를 내쫓고 고려를 세운 뒤, 신라와 우호 관계를 유지하며 후백제와 대립합니다.
+        신라 말 혼란 속에 견훤(후백제)과 궁예(후고구려)가 나라를 세우며 후삼국이 시작됩니다.
+        왕건은 궁예를 내쫓고 고려를 세운 뒤 신라와 우호 관계를 유지하며 후백제와 대립합니다.
         공산 전투 패배 → 고창 전투 역전 → 후백제 내분(견훤 투항) → 신라 항복 → 후삼국 통일.
-        <strong style="color:var(--text)">고려의 통일은 군사력뿐 아니라 호족 포섭과 발해 유민 수용으로 완성됩니다.</strong>
+        고려의 통일은 군사력뿐 아니라 <strong>호족 포섭과 발해 유민 수용</strong>으로 완성됩니다.
       </div>
     </div>
-
     <div class="result-btns">
       <button class="btn-home" onclick="goHome()">처음으로</button>
       <button class="btn-again" onclick="retryGame()">한 번 더 도전 →</button>
@@ -996,149 +795,77 @@ body {
 </div>
 
 <script>
-// ══════════════════════════════════════════
-//  데이터
-// ══════════════════════════════════════════
-
+// ══════ 데이터 ══════
 const EVENTS = [
-  {
-    id: 'e1',
-    year: 900,
-    display: '900년',
-    name: '후백제 건국',
-    faction: 'hubaekje',
-    factionName: '후백제',
-    brief: '견훤이 완산주(전주)에 나라를 세움',
-    explain: '상주 출신 장교 견훤이 농민 봉기를 틈타 세력을 키우고 완산주에 도읍을 정했습니다. 백제 부흥을 내세우며 의자왕의 원한을 갚겠다고 선언했죠.'
-  },
-  {
-    id: 'e2',
-    year: 901,
-    display: '901년',
-    name: '후고구려 건국',
-    faction: 'other',
-    factionName: '후고구려',
-    brief: '궁예가 송악에서 나라를 세움',
-    explain: '신라 왕족 출신 궁예는 양길의 부하로 있다가 자립해 고구려 부흥을 내세우며 송악에서 나라를 세웠습니다. 이후 나라 이름을 마진 → 태봉으로 바꾸고 철원으로 천도했습니다.'
-  },
-  {
-    id: 'e3',
-    year: 918,
-    display: '918년',
-    name: '고려 건국',
-    faction: 'goryeo',
-    factionName: '고려',
-    brief: '왕건이 궁예를 내쫓고 고려를 세움',
-    explain: '궁예가 왕권 강화를 위해 호족을 탄압하자 호족 세력이 궁예를 내쫓았습니다. 시중의 자리에 있던 왕건이 국왕으로 추대되어 나라 이름을 고려로 고쳤습니다.'
-  },
-  {
-    id: 'e4',
-    year: 927,
-    display: '927년',
-    name: '공산 전투 — 고려 패배',
-    faction: 'goryeo',
-    factionName: '고려',
-    brief: '견훤의 기습 공격으로 고려군이 패함',
-    explain: '견훤이 신라의 금성(경주)을 습격하자 왕건이 신라를 돕기 위해 출병했습니다. 그러나 공산(대구)에서 후백제군의 기습을 받아 크게 패하고, 왕건은 신숭겸의 희생으로 겨우 목숨을 건졌습니다.'
-  },
-  {
-    id: 'e5',
-    year: 930,
-    display: '930년',
-    name: '고창 전투 — 고려 승리',
-    faction: 'goryeo',
-    factionName: '고려',
-    brief: '안동 지역 호족의 도움으로 고려가 역전 승리',
-    explain: '교통 요충지 고창(안동)에서 벌어진 이 전투에서 왕건은 지역 호족들의 지원을 받아 승리했습니다. 이후 고려가 후삼국 통일의 주도권을 잡게 됩니다. 호족 포섭 전략의 결실이었습니다.'
-  },
-  {
-    id: 'e6',
-    year: 934,
-    display: '934년',
-    name: '발해 유민 고려 투항',
-    faction: 'other',
-    factionName: '발해',
-    brief: '대광현이 수만 명의 유민을 이끌고 고려에 옴',
-    explain: '거란에 멸망한 발해의 세자 대광현이 수만 명의 유민을 이끌고 고려에 투항했습니다. 왕건은 이들을 적극 포용하며 고구려 계승 의식을 강화했고, 발해 유민은 서북 지방에 거주하게 됩니다.'
-  },
-  {
-    id: 'e7',
-    year: 935,
-    display: '935년',
-    name: '견훤, 고려에 투항',
-    faction: 'hubaekje',
-    factionName: '후백제',
-    brief: '아들 신검에게 왕위를 빼앗긴 견훤이 고려로',
-    explain: '견훤의 큰아들 신검이 아버지를 금산사에 가두고 왕위를 빼앗았습니다. 탈출한 견훤은 자신이 세운 나라의 적 고려 왕건에게 투항했죠. 후백제의 내분이 통일의 결정적 계기가 됩니다.'
-  },
-  {
-    id: 'e8',
-    year: 935,
-    display: '935년',
-    name: '신라 경순왕 항복',
-    faction: 'silla',
-    factionName: '신라',
-    brief: '경순왕이 스스로 고려에 나라를 넘김',
-    explain: '나라를 유지하기 어렵다고 판단한 경순왕이 신하들의 반대를 무릅쓰고 고려에 항복을 결정했습니다. 이로써 신라는 천 년의 역사를 마감했습니다. 왕건은 경순왕을 예우해 사심관 제도의 첫 사례로 삼았습니다.'
-  },
-  {
-    id: 'e9',
-    year: 936,
-    display: '936년',
-    name: '후삼국 통일',
-    faction: 'goryeo',
-    factionName: '고려',
-    brief: '일리천 전투 승리로 후백제 멸망, 통일 완성',
-    explain: '왕건은 일리천(구미)에서 신검이 이끄는 후백제군을 격파하고 후삼국을 통일했습니다. 고려의 통일은 신라의 삼국통일과 달리 발해 유민까지 포용한 더 넓은 범위의 통합이었습니다.'
-  }
+  { id:'e1', year:900, display:'900년', name:'후백제 건국', faction:'hubaekje', factionName:'후백제',
+    explain:'견훤이 완산주(전주)에 후백제를 세웠습니다. 백제 부흥을 내세우며 의자왕의 원한을 갚겠다고 선언했죠.' },
+  { id:'e2', year:901, display:'901년', name:'후고구려 건국', faction:'other', factionName:'후고구려',
+    explain:'궁예가 고구려 부흥을 내세우며 송악에서 나라를 세웠습니다. 이후 마진 → 태봉으로 이름을 바꾸고 철원으로 천도했습니다.' },
+  { id:'e3', year:918, display:'918년', name:'고려 건국', faction:'goryeo', factionName:'고려',
+    explain:'궁예가 호족을 탄압하자 호족 세력이 궁예를 내쫓았습니다. 시중이던 왕건이 국왕으로 추대되어 나라 이름을 고려로 고쳤습니다.' },
+  { id:'e4', year:927, display:'927년', name:'공산 전투 — 고려 패배', faction:'goryeo', factionName:'고려',
+    explain:'왕건이 신라를 돕기 위해 출병했다가 공산(대구)에서 후백제군의 기습을 받아 크게 패했습니다. 신숭겸의 희생으로 왕건은 겨우 목숨을 건졌습니다.' },
+  { id:'e5', year:930, display:'930년', name:'고창 전투 — 고려 승리', faction:'goryeo', factionName:'고려',
+    explain:'고창(안동)에서 지역 호족들의 지원을 받아 왕건이 역전 승리했습니다. 이후 고려가 후삼국 통일의 주도권을 잡게 됩니다.' },
+  { id:'e6', year:934, display:'934년', name:'발해 유민 고려 투항', faction:'other', factionName:'발해',
+    explain:'거란에 멸망한 발해의 세자 대광현이 수만 명을 이끌고 고려에 투항했습니다. 왕건은 이들을 포용하며 고구려 계승 의식을 강화했습니다.' },
+  { id:'e7', year:935, display:'935년 ①', name:'견훤, 고려에 투항', faction:'hubaekje', factionName:'후백제',
+    explain:'아들 신검이 견훤을 금산사에 가두고 왕위를 빼앗았습니다. 탈출한 견훤은 자신의 적인 왕건에게 투항했고, 후백제의 내분이 통일의 결정적 계기가 됩니다.' },
+  { id:'e8', year:935, display:'935년 ②', name:'신라 경순왕 항복', faction:'silla', factionName:'신라',
+    explain:'나라를 유지하기 어렵다고 판단한 경순왕이 고려에 항복했습니다. 천 년 신라가 역사를 마감한 순간입니다.' },
+  { id:'e9', year:936, display:'936년', name:'후삼국 통일', faction:'goryeo', factionName:'고려',
+    explain:'일리천(구미)에서 신검의 후백제군을 격파하고 후삼국을 통일했습니다. 발해 유민까지 포용한 더 넓은 범위의 통합이었습니다.' }
 ];
 
-// 슬롯 정의 (연도별로 카드 하나씩)
 const SLOTS = [
-  { slotId: 's900', yearLabel: '900년', answerId: 'e1' },
-  { slotId: 's901', yearLabel: '901년', answerId: 'e2' },
-  { slotId: 's918', yearLabel: '918년', answerId: 'e3' },
-  { slotId: 's927', yearLabel: '927년', answerId: 'e4' },
-  { slotId: 's930', yearLabel: '930년', answerId: 'e5' },
-  { slotId: 's934', yearLabel: '934년', answerId: 'e6' },
-  { slotId: 's935a', yearLabel: '935년 ①', answerId: 'e7' },
-  { slotId: 's935b', yearLabel: '935년 ②', answerId: 'e8' },
-  { slotId: 's936', yearLabel: '936년', answerId: 'e9' },
+  { slotId:'s900',  yearLabel:'900년',    answerId:'e1' },
+  { slotId:'s901',  yearLabel:'901년',    answerId:'e2' },
+  { slotId:'s918',  yearLabel:'918년',    answerId:'e3' },
+  { slotId:'s927',  yearLabel:'927년',    answerId:'e4' },
+  { slotId:'s930',  yearLabel:'930년',    answerId:'e5' },
+  { slotId:'s934',  yearLabel:'934년',    answerId:'e6' },
+  { slotId:'s935a', yearLabel:'935년 ①', answerId:'e7' },
+  { slotId:'s935b', yearLabel:'935년 ②', answerId:'e8' },
+  { slotId:'s936',  yearLabel:'936년',    answerId:'e9' },
 ];
 
-// ══════════════════════════════════════════
-//  상태
-// ══════════════════════════════════════════
+// ══════ 상태 ══════
 let timerInterval = null;
-let timeLeft = 90;
+let timeLeft = 180;
+let timeExpired = false;
 let currentScore = 0;
 let draggedCardId = null;
-let slotContents = {}; // slotId → eventId
+let slotContents = {};
 let finalCorrect = 0;
 let finalTimeBonus = 0;
 
-// ══════════════════════════════════════════
-//  화면 전환
-// ══════════════════════════════════════════
+// 터치 드래그 상태
+let touchCard = null;
+let touchGhost = null;
+let touchOriginPool = false;
+let touchOriginSlot = null;
+
+// ══════ 화면 전환 ══════
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + id).classList.add('active');
   window.scrollTo(0, 0);
 }
 
-// ══════════════════════════════════════════
-//  게임 시작
-// ══════════════════════════════════════════
+// ══════ 게임 시작 ══════
 function startGame() {
   slotContents = {};
   currentScore = 0;
-  timeLeft = 90;
+  timeLeft = 180;
+  timeExpired = false;
   finalCorrect = 0;
   finalTimeBonus = 0;
+  draggedCardId = null;
 
   buildTimeline();
   buildCardPool();
   updateScoreDisplay();
+  document.getElementById('time-expired-banner').classList.remove('show');
   startTimer();
   showScreen('game');
 }
@@ -1146,7 +873,6 @@ function startGame() {
 function buildTimeline() {
   const container = document.getElementById('timeline-slots');
   container.innerHTML = '';
-
   SLOTS.forEach(slot => {
     const el = document.createElement('div');
     el.className = 'slot';
@@ -1155,10 +881,9 @@ function buildTimeline() {
       <div class="slot-year">${slot.yearLabel}</div>
       <div class="slot-dot"><div class="slot-dot-inner"></div></div>
       <div class="slot-drop" id="drop-${slot.slotId}"
-        ondragover="dragOver(event, '${slot.slotId}')"
-        ondragleave="dragLeave(event, '${slot.slotId}')"
-        ondrop="dropCard(event, '${slot.slotId}')">
-      </div>
+        ondragover="dragOver(event,'${slot.slotId}')"
+        ondragleave="dragLeave(event,'${slot.slotId}')"
+        ondrop="dropCard(event,'${slot.slotId}')"></div>
     `;
     container.appendChild(el);
   });
@@ -1167,96 +892,157 @@ function buildTimeline() {
 function buildCardPool() {
   const pool = document.getElementById('cards-pool');
   pool.innerHTML = '';
-
-  // 섞기
-  const shuffled = [...EVENTS].sort(() => Math.random() - 0.5);
-
-  shuffled.forEach(ev => {
-    pool.appendChild(makeCard(ev, true));
+  [...EVENTS].sort(() => Math.random() - 0.5).forEach(ev => {
+    pool.appendChild(makeCard(ev));
   });
 }
 
-function makeCard(ev, inPool) {
+function makeCard(ev) {
   const div = document.createElement('div');
   div.className = `event-card ${ev.faction}`;
   div.id = 'card-' + ev.id;
   div.draggable = true;
   div.dataset.eventId = ev.id;
+  div.innerHTML = `<span class="card-faction">${ev.factionName}</span><span>${ev.name}</span>`;
 
-  div.innerHTML = `
-    <span class="card-faction">${ev.factionName}</span>
-    <span>${ev.name}</span>
-  `;
-
+  // 마우스 드래그
   div.addEventListener('dragstart', e => {
     draggedCardId = ev.id;
     div.classList.add('dragging');
     e.dataTransfer.effectAllowed = 'move';
   });
-  div.addEventListener('dragend', () => {
-    div.classList.remove('dragging');
-  });
+  div.addEventListener('dragend', () => div.classList.remove('dragging'));
+
+  // 터치 이벤트
+  div.addEventListener('touchstart', touchStart, { passive: false });
+  div.addEventListener('touchmove', touchMove, { passive: false });
+  div.addEventListener('touchend', touchEnd, { passive: false });
 
   return div;
 }
 
-// ══════════════════════════════════════════
-//  드래그 앤 드롭
-// ══════════════════════════════════════════
+// ══════ 마우스 드래그 앤 드롭 ══════
 function dragOver(e, slotId) {
   e.preventDefault();
   document.getElementById('drop-' + slotId).classList.add('drag-over');
 }
-
 function dragLeave(e, slotId) {
   document.getElementById('drop-' + slotId).classList.remove('drag-over');
 }
-
 function dropCard(e, slotId) {
   e.preventDefault();
-  const dropZone = document.getElementById('drop-' + slotId);
-  dropZone.classList.remove('drag-over');
-
+  document.getElementById('drop-' + slotId).classList.remove('drag-over');
   if (!draggedCardId) return;
+  placeCard(draggedCardId, slotId);
+  draggedCardId = null;
+}
 
-  const ev = EVENTS.find(x => x.id === draggedCardId);
+// ══════ 터치 드래그 앤 드롭 ══════
+function touchStart(e) {
+  const card = e.currentTarget;
+  const evId = card.dataset.eventId;
+  touchCard = card;
+
+  // 풀에 있는지 슬롯에 있는지 기록
+  touchOriginPool = card.closest('#cards-pool') !== null;
+  touchOriginSlot = null;
+  if (!touchOriginPool) {
+    for (const [sid, eid] of Object.entries(slotContents)) {
+      if (eid === evId) { touchOriginSlot = sid; break; }
+    }
+  }
+
+  const t = e.touches[0];
+  const rect = card.getBoundingClientRect();
+
+  // 고스트 생성
+  touchGhost = card.cloneNode(true);
+  touchGhost.classList.add('touch-dragging');
+  touchGhost.style.left = (t.clientX - rect.width / 2) + 'px';
+  touchGhost.style.top  = (t.clientY - rect.height / 2) + 'px';
+  document.body.appendChild(touchGhost);
+
+  card.classList.add('dragging');
+  e.preventDefault();
+}
+
+function touchMove(e) {
+  if (!touchGhost) return;
+  const t = e.touches[0];
+  const rect = touchGhost.getBoundingClientRect();
+  touchGhost.style.left = (t.clientX - rect.width / 2) + 'px';
+  touchGhost.style.top  = (t.clientY - rect.height / 2) + 'px';
+
+  // 슬롯 하이라이트
+  document.querySelectorAll('.slot-drop').forEach(d => d.classList.remove('touch-over'));
+  const el = document.elementFromPoint(t.clientX, t.clientY);
+  const drop = el ? el.closest('.slot-drop') : null;
+  if (drop) drop.classList.add('touch-over');
+
+  e.preventDefault();
+}
+
+function touchEnd(e) {
+  if (!touchGhost || !touchCard) return;
+  const t = e.changedTouches[0];
+
+  // 고스트 제거
+  touchGhost.remove();
+  touchGhost = null;
+  touchCard.classList.remove('dragging');
+
+  document.querySelectorAll('.slot-drop').forEach(d => d.classList.remove('touch-over'));
+
+  const el = document.elementFromPoint(t.clientX, t.clientY);
+  const drop = el ? el.closest('.slot-drop') : null;
+
+  if (drop) {
+    const slotId = drop.id.replace('drop-', '');
+    placeCard(touchCard.dataset.eventId, slotId);
+  }
+
+  touchCard = null;
+  touchOriginPool = false;
+  touchOriginSlot = null;
+  e.preventDefault();
+}
+
+// ══════ 카드 배치 공통 ══════
+function placeCard(evId, slotId) {
+  const ev = EVENTS.find(x => x.id === evId);
   if (!ev) return;
 
-  // 이미 다른 슬롯에 있던 카드라면 원래 슬롯에서 제거
+  // 기존에 다른 슬롯에 있던 카드라면 그 슬롯에서 제거
   for (const [sid, eid] of Object.entries(slotContents)) {
-    if (eid === draggedCardId && sid !== slotId) {
-      const oldDrop = document.getElementById('drop-' + sid);
-      oldDrop.innerHTML = '';
+    if (eid === evId && sid !== slotId) {
+      document.getElementById('drop-' + sid).innerHTML = '';
       delete slotContents[sid];
     }
   }
 
-  // 이 슬롯에 이미 카드가 있으면 풀로 돌려보내기
+  // 이 슬롯에 이미 있는 카드를 풀로 돌려보냄
   if (slotContents[slotId]) {
     const existing = EVENTS.find(x => x.id === slotContents[slotId]);
-    const pool = document.getElementById('cards-pool');
-    pool.appendChild(makeCard(existing, true));
+    document.getElementById('cards-pool').appendChild(makeCard(existing));
   }
 
-  // 카드를 풀에서 제거
-  const oldCard = document.getElementById('card-' + draggedCardId);
+  // 원본 카드 풀/슬롯에서 제거
+  const oldCard = document.getElementById('card-' + evId);
   if (oldCard) oldCard.remove();
 
   // 슬롯에 배치
+  const dropZone = document.getElementById('drop-' + slotId);
   dropZone.innerHTML = '';
-  const newCard = makeCard(ev, false);
-  dropZone.appendChild(newCard);
-  slotContents[slotId] = draggedCardId;
+  dropZone.appendChild(makeCard(ev));
+  slotContents[slotId] = evId;
 
-  draggedCardId = null;
   updateProgress();
   checkReady();
 }
 
 function updateProgress() {
   const filled = Object.keys(slotContents).length;
-  const total = SLOTS.length;
-  document.getElementById('progress-fill').style.width = (filled / total * 100) + '%';
+  document.getElementById('progress-fill').style.width = (filled / SLOTS.length * 100) + '%';
 }
 
 function checkReady() {
@@ -1273,23 +1059,24 @@ function checkReady() {
   }
 }
 
-// ══════════════════════════════════════════
-//  타이머
-// ══════════════════════════════════════════
+// ══════ 타이머 ══════
 function startTimer() {
   clearInterval(timerInterval);
   updateTimerUI();
-
   timerInterval = setInterval(() => {
-    timeLeft--;
-    updateTimerUI();
-
-    if (timeLeft <= 0) {
+    if (timeLeft > 0) {
+      timeLeft--;
+      updateTimerUI();
+    }
+    if (timeLeft <= 0 && !timeExpired) {
+      timeExpired = true;
+      document.getElementById('time-expired-banner').classList.add('show');
+      // 타이머 UI 고정
+      const fill = document.getElementById('timer-fill');
+      const num = document.getElementById('timer-num');
+      if (fill) fill.classList.add('expired');
+      if (num) { num.textContent = '0'; num.classList.add('expired'); }
       clearInterval(timerInterval);
-      timeLeft = 0;
-      // 비어있는 슬롯 처리 후 결과
-      autoFillEmpty();
-      checkAnswers();
     }
   }, 1000);
 }
@@ -1297,32 +1084,21 @@ function startTimer() {
 function updateTimerUI() {
   const num = document.getElementById('timer-num');
   const fill = document.getElementById('timer-fill');
-
   if (!num || !fill) return;
-
   num.textContent = timeLeft;
-
   const circumference = 125.6;
-  const ratio = timeLeft / 90;
-  fill.style.strokeDashoffset = circumference * (1 - ratio);
-
-  fill.classList.remove('warn', 'danger');
-  if (timeLeft <= 15) fill.classList.add('danger');
-  else if (timeLeft <= 30) fill.classList.add('warn');
+  fill.style.strokeDashoffset = circumference * (1 - timeLeft / 180);
+  fill.classList.remove('warn', 'danger', 'expired');
+  if (timeLeft <= 20) fill.classList.add('danger');
+  else if (timeLeft <= 45) fill.classList.add('warn');
 }
 
-function autoFillEmpty() {
-  // 시간 초과 시 빈 슬롯에 더미 처리
-  SLOTS.forEach(slot => {
-    if (!slotContents[slot.slotId]) {
-      slotContents[slot.slotId] = '__empty__';
-    }
-  });
+function updateScoreDisplay() {
+  const el = document.getElementById('score-num');
+  if (el) el.textContent = currentScore;
 }
 
-// ══════════════════════════════════════════
-//  정답 확인
-// ══════════════════════════════════════════
+// ══════ 정답 확인 ══════
 function checkAnswers() {
   clearInterval(timerInterval);
 
@@ -1330,22 +1106,13 @@ function checkAnswers() {
   const results = [];
 
   SLOTS.forEach(slot => {
-    const placed = slotContents[slot.slotId];
+    const placed = slotContents[slot.slotId] || '__empty__';
     const isCorrect = placed === slot.answerId;
     if (isCorrect) correct++;
-
     const ev = EVENTS.find(x => x.id === slot.answerId);
     const placedEv = EVENTS.find(x => x.id === placed);
+    results.push({ slot, ev, placedEv, isCorrect, placed });
 
-    results.push({
-      slot,
-      ev,
-      placedEv,
-      isCorrect,
-      placed
-    });
-
-    // 슬롯 시각 피드백
     const slotEl = document.getElementById('slot-' + slot.slotId);
     if (slotEl) {
       slotEl.classList.remove('slot-correct', 'slot-wrong');
@@ -1354,61 +1121,45 @@ function checkAnswers() {
   });
 
   finalCorrect = correct;
-
-  // 점수 계산
   const baseScore = correct * 10;
-  const timeBonus = Math.round(timeLeft / 90 * 20);
+  const timeBonus = timeExpired ? 0 : Math.round(timeLeft / 180 * 20);
   finalTimeBonus = timeBonus;
-  const totalScore = baseScore + timeBonus;
-  currentScore = totalScore;
-
+  currentScore = baseScore + timeBonus;
   updateScoreDisplay();
-  buildFeedback(results, totalScore, correct, timeBonus);
 
-  setTimeout(() => showScreen('feedback'), 800);
+  buildFeedback(results, currentScore, correct, timeBonus);
+  setTimeout(() => showScreen('feedback'), 700);
 }
 
-function updateScoreDisplay() {
-  const el = document.getElementById('score-num');
-  if (el) el.textContent = currentScore;
-}
-
-// ══════════════════════════════════════════
-//  피드백 화면 구성
-// ══════════════════════════════════════════
+// ══════ 피드백 ══════
 function buildFeedback(results, totalScore, correct, timeBonus) {
   const total = SLOTS.length;
   const accuracy = Math.round(correct / total * 100);
 
-  // 스코어 바
   document.getElementById('fb-score-bar').innerHTML = `
-    <div class="fb-score-left">
+    <div>
       <div class="fb-score-num">${totalScore}</div>
-      <div class="fb-score-label">점</div>
+      <div class="fb-score-unit">점</div>
     </div>
-    <div class="fb-score-right">
+    <div>
       <div class="fb-accuracy">${correct} / ${total}</div>
       <div class="fb-accuracy-label">정확도 ${accuracy}%</div>
-      <div class="fb-time-bonus">⏱ 시간 보너스 +${timeBonus}점</div>
+      <div class="fb-time-bonus">${timeExpired ? '⏱ 시간 초과 (보너스 없음)' : `⏱ 시간 보너스 +${timeBonus}점`}</div>
     </div>
   `;
 
-  // 항목별 피드백
   const list = document.getElementById('feedback-list');
   list.innerHTML = '';
-
   results.forEach(r => {
     const div = document.createElement('div');
     div.className = `fb-item ${r.isCorrect ? 'correct' : 'wrong'}`;
-
     if (r.isCorrect) {
       div.innerHTML = `
         <div class="fb-item-header">
           <span class="fb-result-icon">✓</span>
           <span class="fb-year">${r.ev.display}</span>
           <span class="fb-event-name">${r.ev.name}</span>
-        </div>
-      `;
+        </div>`;
     } else {
       const placedName = r.placedEv ? r.placedEv.name : '(배치 안 함)';
       div.innerHTML = `
@@ -1418,57 +1169,35 @@ function buildFeedback(results, totalScore, correct, timeBonus) {
           <span class="fb-event-name">${r.ev.name}</span>
         </div>
         <div class="fb-wrong-detail">
-          <div class="fb-wrong-placed">이 칸에 배치한 카드 → ${placedName}</div>
+          <div class="fb-wrong-placed">이 칸에 배치 → ${placedName}</div>
           <div class="fb-explain">${r.ev.explain}</div>
-        </div>
-      `;
+        </div>`;
     }
-
     list.appendChild(div);
   });
 }
 
-// ══════════════════════════════════════════
-//  결과 화면
-// ══════════════════════════════════════════
+// ══════ 결과 ══════
 function showResult() {
   const total = SLOTS.length;
   const accuracy = Math.round(finalCorrect / total * 100);
-  const totalScore = currentScore;
-
-  // 등급
   let grade, title, sub;
-  if (accuracy >= 90) {
-    grade = 'A'; title = '역사의 흐름을 꿰뚫었어요';
-    sub = '후삼국의 혼란과 고려 통일 과정을 정확히 이해했습니다.';
-  } else if (accuracy >= 70) {
-    grade = 'B'; title = '흐름을 잘 파악했어요';
-    sub = '핵심 사건들을 잘 이해했습니다. 틀린 항목을 다시 한번 확인해보세요.';
-  } else if (accuracy >= 50) {
-    grade = 'C'; title = '조금 더 연습이 필요해요';
-    sub = '사건의 순서와 인과관계를 다시 복습해보세요.';
-  } else {
-    grade = 'D'; title = '다시 한번 도전해보세요';
-    sub = '교과서 77쪽을 확인하고 다시 도전해보세요!';
-  }
+  if (accuracy >= 89) { grade='A'; title='역사의 흐름을 꿰뚫었어요'; sub='후삼국의 혼란과 고려 통일 과정을 정확히 이해했습니다.'; }
+  else if (accuracy >= 67) { grade='B'; title='흐름을 잘 파악했어요'; sub='핵심 사건을 잘 이해했습니다. 틀린 항목을 다시 확인해보세요.'; }
+  else if (accuracy >= 45) { grade='C'; title='조금 더 연습이 필요해요'; sub='사건의 순서와 인과관계를 다시 복습해보세요.'; }
+  else { grade='D'; title='다시 한번 도전해보세요'; sub='교과서 77쪽을 확인하고 다시 도전해보세요!'; }
 
   document.getElementById('grade-circle').textContent = grade;
   document.getElementById('result-title').textContent = title;
   document.getElementById('result-sub').textContent = sub;
-  document.getElementById('stat-score').textContent = totalScore;
+  document.getElementById('stat-score').textContent = currentScore;
   document.getElementById('stat-correct').textContent = `${finalCorrect}/${total}`;
-  document.getElementById('stat-time').textContent = `${timeLeft}초`;
-
+  document.getElementById('stat-time').textContent = timeExpired ? '초과' : `${timeLeft}초`;
   showScreen('result');
 }
 
-function retryGame() {
-  startGame();
-}
-
-function goHome() {
-  showScreen('title');
-}
+function retryGame() { startGame(); }
+function goHome() { showScreen('title'); }
 </script>
 </body>
 </html>
